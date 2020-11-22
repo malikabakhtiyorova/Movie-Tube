@@ -17,10 +17,10 @@ var normalizedMovies = movies.map(function (movie) {
 var searchResults = [];
 
 var elSearchForm = $_('.search-form');
-var elSearchForm = $_('.sort-form');
+var elSortForm = $_('.sort-form');
 var elSearchInput = $_('.movie-input', elSearchForm);
 var elSearchOption = $_('.movie-select', elSearchForm);
-var elSearchOption = $_('.movie-sort', elSearchForm);
+var elSortOption = $_('.movie-sort', elSearchForm);
 var elSearchResults = $_('.movies-list');
 var elSearchResultTemplate = $_('#movies-item').content;
 
@@ -67,3 +67,12 @@ var searchForMovies = function (evt) {
 
 
 elSearchForm.addEventListener('submit', searchForMovies);
+
+elSortOption.addEventListener('change', function () {
+  var elSort = elSortOption.value.trim();
+
+  if (elSort === "alphabetical") movie.sort(function (a, b) {
+    return a.rating - b.rating;
+  });
+
+})

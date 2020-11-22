@@ -4,7 +4,7 @@ var normalizedMovies = movies.map(function (movie) {
     year: movie.movie_year,
     categories: movie.Categories.split('|'),
     summary: movie.summary,
-    imageUrl: `http://i3.ytimg.com/vi/${movie.ytid}/hqdefault.jpg`,
+    // imageUrl: `http://i3.ytimg.com/vi/${movie.ytid}/hqdefault.jpg`,
     bigImageUrl: `http://i3.ytimg.com/vi/${movie.ytid}/maxresdefault.jpg`,
     imdbId: movie.imdb_id,
     imdbRating: movie.imdb_rating,
@@ -68,11 +68,51 @@ var searchForMovies = function (evt) {
 
 elSearchForm.addEventListener('submit', searchForMovies);
 
-elSortOption.addEventListener('change', function () {
+elSortOption.addEventListener('input', function () {
   var elSort = elSortOption.value.trim();
 
-  if (elSort === "alphabetical") movie.sort(function (a, b) {
-    return a.rating - b.rating;
-  });
+  if (elSort === "alphabetical") {
+    searchResults.sort(function (a, b) {
+      return a.rating - b.rating;
+    });
+    renderMovies(searchResults);
+  }
 
-})
+
+
+});
+
+elSortOption.addEventListener('change', function () {
+  var elSort = elSortOption.value.trim();
+  console.log(searchResults);
+  if (elSort.value === 'alphabetical') {
+    searchResults.sort(function (a, b) {
+      var nameA = a.title.toLowerCase(), nameB = b.title.toLowerCase();
+      if (nameA < nameB)
+        return -1;
+      if (nameA > nameB)
+        return 1;
+      return 0;
+    });
+  }
+  if (elSort.value === 'reverse') {
+    searchResults.sort(function (a, b) {
+      var nameA = a.title.toLowerCase(), nameB = b.title.toLowerCase();
+      if (nameA < nameB)
+        return 1;
+      if (nameA > nameB)
+        return -1;
+      return 0;
+    });
+  }
+  else if (elSort.value === 'rating') {
+    searchResults.sort(function (a, b) {
+      return b.imdbRating - a.imdbRating;
+    });
+  } else if (elSort.value === 'date') {
+    searchResults.sort(function (a, b) {
+      return b.year - a.year;
+    });
+  }
+  renderMovies(searchResults);
+});

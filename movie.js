@@ -4,7 +4,7 @@ var normalizedMovies = movies.map(function (movie) {
     year: movie.movie_year,
     categories: movie.Categories.split('|'),
     summary: movie.summary,
-    // imageUrl: `http://i3.ytimg.com/vi/${movie.ytid}/hqdefault.jpg`,
+    imageUrl: `http://i3.ytimg.com/vi/${movie.ytid}/hqdefault.jpg`,
     bigImageUrl: `http://i3.ytimg.com/vi/${movie.ytid}/maxresdefault.jpg`,
     imdbId: movie.imdb_id,
     imdbRating: movie.imdb_rating,
@@ -29,7 +29,7 @@ var createMovieElement = function (movie) {
 
   $_('.movie-title', movieElement).textContent = movie.title;
   $_('.movie-img', movieElement).src = movie.imageUrl;
-  $_('.movie-rating', movieElement).textContent = movie.imdb_rating;
+  $_('.movie-rating', movieElement).textContent = movie.imdbRating;
   $_('.movie-genres', movieElement).textContent = movie.categories;
   $_('.movie-year', movieElement).textContent = movie.year;
   $_('.movie-trailer-link', movieElement).href = movie.trailerLink;
@@ -85,31 +85,31 @@ elSortOption.addEventListener('input', function () {
 elSortOption.addEventListener('change', function () {
   var elSort = elSortOption.value.trim();
   console.log(searchResults);
-  if (elSort.value === 'alphabetical') {
+  if (elSort === 'alphabetical') {
     searchResults.sort(function (a, b) {
-      var nameA = a.title.toLowerCase(), nameB = b.title.toLowerCase();
-      if (nameA < nameB)
+      var a = a.title.toLowerCase(), b = b.title.toLowerCase();
+      if (a < b)
         return -1;
-      if (nameA > nameB)
+      if (a > b)
         return 1;
       return 0;
     });
   }
-  if (elSort.value === 'reverse') {
+  else if (elSort === 'reverse') {
     searchResults.sort(function (a, b) {
-      var nameA = a.title.toLowerCase(), nameB = b.title.toLowerCase();
-      if (nameA < nameB)
+      var a = a.title.toLowerCase(), b = b.title.toLowerCase();
+      if (a < b)
         return 1;
-      if (nameA > nameB)
+      if (a > b)
         return -1;
       return 0;
     });
   }
-  else if (elSort.value === 'rating') {
+  else if (elSort === 'rating') {
     searchResults.sort(function (a, b) {
       return b.imdbRating - a.imdbRating;
     });
-  } else if (elSort.value === 'date') {
+  } else if (elSort === 'date') {
     searchResults.sort(function (a, b) {
       return b.year - a.year;
     });

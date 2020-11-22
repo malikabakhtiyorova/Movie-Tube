@@ -46,18 +46,22 @@
   </div>
 
   <div class="container">
-    <ul class="movies-list list-unstyled list-group">
+    <ul class="movies-list d-flex flex-wrap list-unstyled list-group">
     </ul>
   </div>
 
   <template id="movies-item">
-    <li class="list-group-item">
-      <img class="movie-img" width="200" height="180" src="" />
-      <p class="movie-title">akk</p>
-      <p class="movie-rating">Lorem, ipsum.</p>
-      <a class="movie-trailer-link" href="#">Lorem, ipsum dolor.</a>
-      <p class="movie-year">Lorem, ipsum.</p>
-      <p class="movie-genres">Lorem, ipsum.</p>
+    <li
+      class="col-8 mx-auto bg-light d-flex rounded-lg align-items-center justify-content-center list-group-item mt-3 mb-3">
+      <img class="movie-img rounded-lg mb-3 mr-3" width="400" height="200" src="" />
+      <div class="wrapper w-60 mr-auto">
+        <p class="movie-title h4">akk</p>
+
+        <p class="movie-rating h3 badge badge-warning display-2">Lorem, ipsum.</p>
+        <a class="movie-trailer-link h5 d-block" href="#">Trailer link</a>
+        <p class="movie-year h5 font-bold">Lorem, ipsum.</p>
+        <p class="movie-genres h5 font-italic text-break">Lorem, ipsum.</p>
+      </div>
     </li>
   </template>
 
